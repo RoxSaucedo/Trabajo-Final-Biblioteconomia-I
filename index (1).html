@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Webdoc académico sobre la Biblioteca del Centro Cultural de la Embajada de la República del Paraguay: lugar antropológico, mediación, referencia y comunidad.">
+<title>La biblioteca como lugar · Embajada de la República del Paraguay</title>
+<style>
+  :root {
+    --azul: #0B2F6B;
+    --azul-medio: #1D4E9A;
+    --azul-claro: #E6EEF9;
+    --blanco: #FFFFFF;
+    --rojo: #C8443C;
+    --rojo-suave: #E0837C;
+    --rojo-claro: #F7E4E2;
+    --oro: #C9A227;
+    --texto: #1E2430;
+    --texto-suave: #5A6372;
+    --fondo: #FAFBFD;
+    --sombra: 0 10px 30px rgba(11,47,107,.12);
+    --radio: 14px;
+    --serif: Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body { margin: 0; font-family: var(--sans); color: var(--texto); background: var(--fondo); line-height: 1.7; }
+  img { max-width: 100%; display: block; }
+  a { color: var(--azul-medio); }
+  :focus-visible { outline: 3px solid var(--oro); outline-offset: 3px; }
+  h1, h2, h3, h4 { font-family: var(--serif); color: var(--azul); line-height: 1.25; margin: 1.6em 0 .6em; }
+  h1 { font-size: clamp(2.1rem, 5.5vw, 3.8rem); margin-top: 0; color: #fff; }
+  h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); }
+  h3 { font-size: 1.35rem; }
+  h4 { font-family: var(--sans); font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; color: var(--rojo); }
+  p { margin: 0 0 1.1em; }
+  .container { width: min(1040px, 92%); margin-inline: auto; }
+  .kicker { font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: var(--rojo); font-weight: 700; margin: 0 0 .6rem; }
+  .small { font-size: .85rem; opacity: .85; }
+  .btn { display: inline-block; padding: .85rem 1.6rem; border-radius: 999px; text-decoration: none; font-weight: 600; transition: transform .2s, background .2s; }
+  .btn-primary { background: var(--rojo); color: #fff; box-shadow: 0 6px 18px rgba(200,68,60,.35); }
+  .btn-primary:hover { transform: translateY(-2px); background: #b33a33; }
+  .section { padding: 5rem 0; }
+  .section-alt { background: var(--azul-claro); }
+  .section-head { margin-bottom: 2.5rem; max-width: 760px; }
+  .section-head p:not(.kicker) { color: var(--texto-suave); font-size: 1.05rem; }
+  .texto p { max-width: 75ch; }
+
+  /* Barra de progreso */
+  .progress { position: fixed; top: 0; left: 0; height: 4px; width: 0; background: linear-gradient(90deg, var(--rojo), var(--oro)); z-index: 300; }
+
+  /* Cabecera */
+  .site-header { position: sticky; top: 0; z-index: 200; background: rgba(11,47,107,.97); backdrop-filter: blur(8px); color: #fff; }
+  .nav-wrap { display: flex; align-items: center; justify-content: space-between; min-height: 64px; position: relative; width: min(1200px, 94%); margin: 0 auto; }
+  .brand { display: flex; align-items: center; gap: .6rem; color: #fff; text-decoration: none; font-weight: 600; font-size: .92rem; }
+  .brand-mark { width: 14px; height: 14px; border-radius: 50%; background: var(--rojo); box-shadow: 0 0 0 3px #fff; }
+  .site-nav { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: var(--azul); padding: .4rem 0; max-height: 80vh; overflow-y: auto; }
+  .site-nav.open { display: flex; }
+  .site-nav a { color: #fff; text-decoration: none; padding: .85rem 4%; border-top: 1px solid rgba(255,255,255,.08); }
+  .site-nav a:hover, .site-nav a.active { background: var(--azul-medio); }
+  .menu-toggle { background: none; border: 0; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 8px; }
+  .menu-toggle span { width: 24px; height: 2px; background: #fff; border-radius: 2px; }
+
+  /* Portada */
+  .hero { position: relative; min-height: 90vh; display: flex; align-items: center; color: #fff; background: linear-gradient(160deg, var(--azul) 0%, var(--azul-medio) 100%); overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; opacity: .55; pointer-events: none;
+    background-image:
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,.14) 0 5px, transparent 6px),
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,.07) 0 22px, transparent 23px);
+    background-size: 56px 56px, 56px 56px; }
+  .hero-content { position: relative; width: min(1040px, 92%); margin: 0 auto; padding: 6rem 0 7rem; }
+  .hero .kicker { color: #F3B5AE; }
+  .hero .lead { color: rgba(255,255,255,.92); font-size: clamp(1.05rem, 2vw, 1.22rem); max-width: 62ch; }
+  .cover-meta { margin: 2.2rem 0 2rem; padding: 1.2rem 1.4rem; border-left: 3px solid var(--rojo); background: rgba(255,255,255,.07); border-radius: 0 var(--radio) var(--radio) 0; font-size: .95rem; line-height: 1.6; }
+  .cover-meta strong { font-family: var(--serif); font-size: 1.2rem; font-weight: normal; display: block; margin-bottom: .3rem; }
+  .hero-stripes { position: absolute; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr 1fr 1fr; height: 10px; }
+  .s-blue { background: var(--azul); } .s-white { background: #fff; } .s-red { background: var(--rojo); }
+  .abstract { background: #fff; border-radius: var(--radio); box-shadow: var(--sombra); padding: 2rem; margin-top: -4rem; position: relative; z-index: 2; }
+  .abstract h3 { margin-top: 0; }
+  .keywords { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+  .keywords li { background: var(--azul-claro); color: var(--azul); padding: .3rem .8rem; border-radius: 999px; font-size: .85rem; }
+
+  /* Marco teórico */
+  .theory-block { background: #fff; border-radius: var(--radio); box-shadow: var(--sombra); padding: 2.2rem; margin-bottom: 2.2rem; border-top: 4px solid var(--rojo); }
+  .theory-block .src { font-size: .9rem; color: var(--texto-suave); margin: -.4rem 0 1.2rem; font-style: italic; }
+  .concepts { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin: 1.6rem 0; }
+  .concept { background: var(--fondo); padding: 1.3rem; border-radius: var(--radio); border-left: 4px solid var(--azul-medio); }
+  .concept h4 { color: var(--azul); margin-top: 0; font-size: .95rem; text-transform: none; letter-spacing: 0; font-family: var(--serif); }
+  .concept p { margin: 0; font-size: .95rem; color: var(--texto-suave); }
+  .compare { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; margin: 1.6rem 0; }
+  .compare > div { padding: 1.4rem; border-radius: var(--radio); }
+  .compare .nl { background: var(--rojo-claro); }
+  .compare .lg { background: var(--azul-claro); }
+  .compare ul { margin: .5rem 0 0; padding-left: 1.2rem; font-size: .95rem; }
+  table.chain { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: .95rem; background: #fff; }
+  table.chain th, table.chain td { text-align: left; padding: .75rem .9rem; border-bottom: 1px solid #E2E8F2; vertical-align: top; }
+  table.chain th { background: var(--azul); color: #fff; font-weight: 600; font-family: var(--sans); }
+  table.chain tr:nth-child(even) td { background: var(--fondo); }
+  blockquote { margin: 1.5rem 0; padding: 1rem 1.4rem; background: var(--fondo); border-left: 3px solid var(--azul-medio); font-family: var(--serif); font-style: italic; color: var(--azul); border-radius: 0 var(--radio) var(--radio) 0; }
+  .note { background: #FFF8DD; border: 1px dashed var(--oro); padding: 1rem 1.2rem; border-radius: 10px; font-size: .93rem; color: #6B5600; margin: 1.5rem 0; }
+  .note strong { color: #6B5600; }
+  .tipos { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin: 1.4rem 0; }
+  .tipo { background: var(--azul); color: #fff; padding: 1.3rem; border-radius: var(--radio); }
+  .tipo h4 { color: #F3B5AE; margin-top: 0; }
+  .tipo p { margin: 0; font-size: .95rem; opacity: .92; }
+
+  /* Galería */
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; margin-top: 1rem; }
+  .gallery-item { position: relative; padding: 0; border: 0; border-radius: var(--radio); overflow: hidden; cursor: zoom-in; aspect-ratio: 4 / 3; box-shadow: var(--sombra); background: none; }
+  .ph { width: 100%; height: 100%; display: grid; place-items: center; color: #fff; font-family: var(--serif); padding: 1rem; text-align: center; transition: transform .5s; }
+  .ph span { background: rgba(0,0,0,.18); padding: .3rem .8rem; border-radius: 6px; font-size: 1.05rem; }
+  .ph-1 { background: linear-gradient(135deg, #0B2F6B, #1D4E9A); }
+  .ph-2 { background: linear-gradient(135deg, #1D4E9A, #6E8FC4); }
+  .ph-3 { background: linear-gradient(135deg, #C8443C, #E0837C); }
+  .ph-4 { background: linear-gradient(135deg, #E6EEF9, #B9CBE8); color: var(--azul); }
+  .ph-5 { background: linear-gradient(135deg, #0B2F6B, #C8443C); }
+  .ph-6 { background: linear-gradient(135deg, #C9A227, #E8D28A); color: var(--azul); }
+  .ph-7 { background: linear-gradient(135deg, #6E8FC4, #E6EEF9); color: var(--azul); }
+  .ph-8 { background: linear-gradient(135deg, #7A2E28, #C8443C); }
+  .ph-9 { background: linear-gradient(135deg, #1D4E9A, #C9A227); }
+  .gallery-item:hover .ph { transform: scale(1.05); }
+  .zoom-hint { position: absolute; right: 12px; bottom: 12px; width: 36px; height: 36px; border-radius: 50%; background: var(--rojo); color: #fff; display: grid; place-items: center; font-size: 1.4rem; opacity: 0; transition: .25s; }
+  .gallery-item:hover .zoom-hint, .gallery-item:focus-visible .zoom-hint { opacity: 1; }
+  .gallery-tag { position: absolute; left: 12px; top: 12px; background: rgba(255,255,255,.92); color: var(--azul); font-size: .72rem; padding: .25rem .6rem; border-radius: 999px; text-transform: uppercase; letter-spacing: .05em; font-weight: 700; }
+
+  /* Lightbox */
+  .lightbox { position: fixed; inset: 0; z-index: 400; background: rgba(5,14,32,.96); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s; padding: 1rem; }
+  .lightbox.open { opacity: 1; visibility: visible; }
+  .lb-figure { margin: 0; max-width: min(960px, 100%); display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+  .lb-stage { width: min(880px, 88vw); height: 58vh; border-radius: 10px; overflow: hidden; }
+  .lb-stage .ph { font-size: 1.6rem; }
+  .lb-concept { color: #F3B5AE; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; margin: 0; }
+  #lb-caption { color: #fff; font-family: var(--serif); font-style: italic; text-align: center; max-width: 72ch; font-size: 1.05rem; border-left: 3px solid var(--rojo); padding-left: 1rem; }
+  .lb-close, .lb-nav { position: absolute; background: rgba(255,255,255,.12); color: #fff; border: 0; cursor: pointer; border-radius: 50%; width: 48px; height: 48px; font-size: 1.8rem; line-height: 1; display: grid; place-items: center; }
+  .lb-close:hover, .lb-nav:hover { background: var(--rojo); }
+  .lb-close { top: 16px; right: 16px; }
+  .lb-prev { left: 16px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 16px; top: 50%; transform: translateY(-50%); }
+  .lb-counter { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,.7); margin: 0; font-size: .9rem; }
+
+  /* Entrevista / audio */
+  .audio-player { background: linear-gradient(135deg, var(--azul), var(--azul-medio)); color: #fff; border-radius: var(--radio); padding: 1.5rem 1.8rem; box-shadow: var(--sombra); position: sticky; top: 74px; z-index: 100; margin-bottom: 2rem; }
+  .audio-label { margin: 0; font-size: .75rem; text-transform: uppercase; letter-spacing: .15em; color: #F3B5AE; }
+  .audio-title { margin: .2rem 0 .8rem; font-family: var(--serif); font-size: 1.25rem; color: #fff; }
+  .audio-controls { display: flex; align-items: center; gap: 1rem; }
+  .play-main { flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; border: 0; background: var(--rojo); color: #fff; font-size: 1.1rem; cursor: pointer; display: grid; place-items: center; transition: background .2s, transform .2s; }
+  .play-main:hover { background: #b33a33; transform: scale(1.05); }
+  .play-main:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+  .audio-seek { flex: 1; accent-color: var(--rojo-suave); cursor: pointer; }
+  .audio-time { font-size: .85rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .audio-status { margin: .6rem 0 0; font-size: .82rem; color: #F3B5AE; min-height: 1.2em; }
+  .audio-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+  .audio-item { background: #fff; padding: 1.4rem; border-radius: var(--radio); box-shadow: var(--sombra); display: flex; gap: 1.2rem; align-items: flex-start; }
+  .audio-item.is-active { outline: 2px solid var(--rojo); }
+  .audio-item .meta { font-size: .78rem; color: var(--texto-suave); text-transform: uppercase; letter-spacing: .05em; margin: 0 0 .3rem; }
+  .audio-item h3 { font-size: 1.2rem; margin: 0 0 .4rem; }
+  .pick { flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; border: 0; background: var(--azul); color: #fff; cursor: pointer; font-size: 1.1rem; display: grid; place-items: center; transition: background .2s, transform .2s; }
+  .pick:hover { background: var(--rojo); transform: scale(1.06); }
+  .transcript { font-style: italic; color: var(--texto-suave); margin: 0 0 .7rem; }
+  .analysis-mini { font-size: .93rem; background: var(--azul-claro); padding: .7rem 1rem; border-radius: 10px; margin: 0; }
+  .tag { display: inline-block; font-size: .72rem; background: var(--rojo-claro); color: var(--rojo); padding: .15rem .55rem; border-radius: 999px; margin-right: .3rem; font-weight: 700; }
+
+  /* Diagnóstico */
+  .diag { width: 100%; border-collapse: collapse; background: #fff; box-shadow: var(--sombra); border-radius: var(--radio); overflow: hidden; font-size: .95rem; }
+  .diag th, .diag td { text-align: left; padding: .9rem 1rem; vertical-align: top; border-bottom: 1px solid #E2E8F2; }
+  .diag th { background: var(--azul); color: #fff; font-family: var(--sans); font-weight: 600; }
+  .diag td:first-child { font-weight: 600; color: var(--azul); width: 22%; }
+  .proposal { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin: 1.5rem 0; }
+  .prop { background: #fff; border-radius: var(--radio); box-shadow: var(--sombra); padding: 1.5rem; border-top: 4px solid var(--oro); }
+  .prop h4 { color: var(--azul); margin-top: 0; font-size: .95rem; text-transform: none; letter-spacing: 0; font-family: var(--serif); }
+  .prop p { margin: 0; font-size: .95rem; color: var(--texto-suave); }
+
+  /* Conclusiones y bibliografía */
+  .biblio { list-style: none; padding: 0; margin: 0; }
+  .biblio li { padding-left: 2em; text-indent: -2em; margin-bottom: 1.1rem; font-size: .97rem; }
+  .biblio em { font-style: italic; }
+  .biblio .todo { background: #FFF8DD; padding: 0 .3em; }
+  .bib-group { margin-bottom: 2rem; }
+
+  /* Pie */
+  .site-footer { background: var(--azul); color: #fff; padding: 2.5rem 0; text-align: center; border-top: 6px solid var(--rojo); }
+  .site-footer p { margin: .3rem 0; }
+
+  /* Responsive */
+  @media (min-width: 900px) {
+    .menu-toggle { display: none; }
+    .site-nav { display: flex; position: static; flex-direction: row; background: none; padding: 0; gap: 1rem; max-height: none; overflow: visible; }
+    .site-nav a { border: 0; padding: .4rem 0; font-size: .86rem; opacity: .9; }
+    .site-nav a:hover, .site-nav a.active { background: none; opacity: 1; text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 6px; }
+  }
+  @media (max-width: 640px) {
+    .section { padding: 3.5rem 0; }
+    .hero-content { padding: 4rem 0 5rem; }
+    .abstract { margin-top: -2.5rem; padding: 1.4rem; }
+    .theory-block { padding: 1.4rem; }
+    .compare { grid-template-columns: 1fr; }
+    .audio-player { top: 66px; }
+    .audio-item { flex-direction: column; }
+    .diag th:nth-child(3), .diag td:nth-child(3) { display: none; }
+    table.chain th:nth-child(3), table.chain td:nth-child(3) { display: none; }
+    .lb-stage { height: 48vh; }
+    .lb-prev, .lb-next { top: auto; bottom: 48px; transform: none; }
+    .lb-prev { left: 20%; } .lb-next { right: 20%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="#inicio" class="brand"><span class="brand-mark" aria-hidden="true"></span><span>Biblioteca · Embajada del Paraguay</span></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    <nav id="menu" class="site-nav" aria-label="Secciones del sitio">
+      <a href="#inicio">Inicio</a>
+      <a href="#marco">Marco teórico</a>
+      <a href="#galeria">Galería espacial</a>
+      <a href="#entrevista">Entrevista</a>
+      <a href="#diagnostico">Diagnóstico</a>
+      <a href="#propuestas">Propuestas</a>
+      <a href="#conclusiones">Conclusiones</a>
+      <a href="#bibliografia">Bibliografía</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== INICIO / PORTADA ===================== -->
+<section id="inicio" class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-content">
+    <p class="kicker">Webdoc académico · Reportaje multimedia</p>
+    <h1>La biblioteca como lugar</h1>
+    <p class="lead">Sujeción subjetiva, mediación y referencia en la visita a la Biblioteca del Centro Cultural de la Embajada de la República del Paraguay.</p>
+    <div class="cover-meta">
+      <strong>Roxana Noemí Saucedo Rojas</strong>
+      Biblioteconomía 1 · Docente: Silvina Fava<br>
+      Instituto de Formación Técnica Superior N.º 13 · Gobierno de la Ciudad de Buenos Aires<br>
+      2026
+    </div>
+    <a href="#marco" class="btn btn-primary">Comenzar la lectura</a>
+  </div>
+  <div class="hero-stripes" aria-hidden="true"><span class="s-blue"></span><span class="s-white"></span><span class="s-red"></span></div>
+</section>
+
+<div class="container">
+  <div class="abstract">
+    <h3>Resumen</h3>
+    <p>Este webdoc analiza la visita a la biblioteca del Centro Cultural de la Embajada de la República del Paraguay a partir de tres ejes teóricos de la materia: el espacio como lugar antropológico frente al no lugar, la tipología y la comunicación en la biblioteca especializada y patrimonial, y el servicio de referencia como conversación dirigida. El recorrido combina un relevamiento espacial, una entrevista de referencia al personal y un diagnóstico con propuestas de mejora.</p>
+    <p class="small"><strong>Palabras clave:</strong></p>
+    <ul class="keywords">
+      <li>lugar antropológico</li>
+      <li>no lugar</li>
+      <li>mediación</li>
+      <li>biblioteca patrimonial</li>
+      <li>servicio de referencia</li>
+      <li>señalética</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===================== MARCO TEÓRICO ===================== -->
+<section id="marco" class="section">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">01 · Marco teórico</p>
+      <h2>Tres ejes para leer la biblioteca</h2>
+      <p>El análisis se apoya exclusivamente en las fuentes seleccionadas para la materia. Cada eje organiza una parte del diagnóstico posterior.</p>
+    </header>
+
+    <!-- Eje 1 -->
+    <article class="theory-block texto">
+      <p class="kicker">Eje 1</p>
+      <h3>Espacio y subjetividad</h3>
+      <p class="src">Marc Augé; Prof. Gustavo Blasco</p>
+
+      <p>Augé distingue entre el <em>lugar antropológico</em>, que se define como identitario, relacional e histórico, y el <em>no lugar</em>, propio de la sobremodernidad, donde predominan el tránsito, el anonimato y las relaciones contractuales o funcionales. Esta distinción permite preguntar qué tipo de vínculo produce un espacio con quienes lo habitan.</p>
+
+      <div class="compare">
+        <div class="lg">
+          <h4>Lugar antropológico</h4>
+          <ul>
+            <li>Identidad compartida o reconocible</li>
+            <li>Relaciones personales y reiteradas</li>
+            <li>Memoria histórica</li>
+          </ul>
+        </div>
+        <div class="nl">
+          <h4>No lugar</h4>
+          <ul>
+            <li>Circulación y tránsito</li>
+            <li>Anonimato de quienes lo usan</li>
+            <li>Vínculos funcionales o contractuales</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>Desde el enfoque de la cátedra, la biblioteca cumple una función de <strong>sujetar o sostener</strong> la constitución subjetiva de la comunidad en el paradigma de la incertidumbre. En un contexto donde los referentes se multiplican y se vuelven inestables, el espacio bibliotecario ofrece anclajes: un lugar al que se vuelve, con una memoria que se comparte y con personas que reconocen a quien lo frecuenta.</p>
+
+      <div class="note"><strong>Nota de cita:</strong> las referencias específicas de Blasco deben incorporarse con la página exacta del texto de la cátedra. Este apartado recoge los conceptos tal como fueron indicados en la materia.</div>
+    </article>
+
+    <!-- Eje 2 -->
+    <article class="theory-block texto">
+      <p class="kicker">Eje 2</p>
+      <h3>Tipología y comunicación</h3>
+      <p class="src">Allendez Sullivan y de la Puente; apuntes de cátedra</p>
+
+      <h4>Del bibliotecario burocrático al profesional curador</h4>
+      <p>La figura tradicional del bibliotecario como guardalibros, centrado en custodiar y prestar, convive hoy con la del profesional dinámico de la Web 2.0, que selecciona, contextualiza y comunica contenidos. La visita permite observar en qué medida el personal se ubica en uno u otro polo, y qué efectos tiene esa posición sobre el usuario.</p>
+
+      <h4>Biblioteca especializada y patrimonial</h4>
+      <p>Las bibliotecas especializadas se distinguen por la exhaustividad temática de sus colecciones. Las patrimoniales se ocupan de fuentes primarias y de literatura gris: documentos de circulación restringida, informes, publicaciones institucionales y materiales que no pasan por el circuito comercial. Estas características vuelven relevante preguntar qué se conserva, qué se difunde y para quién.</p>
+
+      <h4>La cadena comunicacional</h4>
+      <p>La biblioteca puede describirse como una cadena de comunicación con cinco elementos. El siguiente cuadro vincula cada uno con el espacio observado.</p>
+      <table class="chain">
+        <thead>
+          <tr><th>Elemento</th><th>Definición en el contexto bibliotecario</th><th>Ejemplo a observar en la visita</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Emisor</td><td>Quien produce o selecciona el mensaje</td><td>Personal de la biblioteca y el fondo que lo respalda</td></tr>
+          <tr><td>Mensaje</td><td>Contenido que se transmite</td><td>Colección, exhibiciones, folletos</td></tr>
+          <tr><td>Canal</td><td>Medio por el cual circula el mensaje</td><td>Sala, catálogo, señalética, redes</td></tr>
+          <tr><td>Receptor</td><td>Usuario que recibe e interpreta</td><td>Visitantes, estudiantes, comunidad</td></tr>
+          <tr><td>Feedback</td><td>Respuesta que retorna al emisor</td><td>Consultas, comentarios, uso del espacio</td></tr>
+        </tbody>
+      </table>
+
+      <h4>La señalética como factor de identidad</h4>
+      <p>La señalética no solo orienta: comunica. Un cartel, una tipografía o un orden de colores informa sobre la institución y sobre cómo debe comportarse quien la visita. Por eso se la analiza como parte del mensaje y no como un elemento accesorio.</p>
+    </article>
+
+    <!-- Eje 3 -->
+    <article class="theory-block texto">
+      <p class="kicker">Eje 3</p>
+      <h3>Servicio de referencia y entrevista</h3>
+      <p class="src">García y Portugal; Merlo Vega</p>
+
+      <p>La <strong>entrevista de referencia</strong> es una conversación dirigida cuyo objetivo es clarificar la necesidad real de información del usuario, que muchas veces no coincide con la pregunta inicial. El bibliotecario no responde de inmediato: formula preguntas que ayudan a precisar el requerimiento antes de buscar.</p>
+
+      <h4>Tipología de consultas</h4>
+      <div class="tipos">
+        <div class="tipo"><h4>Administrativas</h4><p>Horarios, normas de préstamo, ubicación de servicios, trámites.</p></div>
+        <div class="tipo"><h4>Respuesta rápida</h4><p>Datos puntuales que se resuelven con una consulta breve.</p></div>
+        <div class="tipo"><h4>Investigación bibliográfica</h4><p>Búsquedas que requieren estrategia, selección de fuentes y evaluación.</p></div>
+      </div>
+      <p>Clasificar la consulta permite asignarle el tiempo y el procedimiento adecuados, y evitar que una necesidad compleja se responda como si fuera administrativa.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ===================== GALERÍA ===================== -->
+<section id="galeria" class="section section-alt">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">02 · Relevamiento espacial</p>
+      <h2>Galería de relevamiento</h2>
+      <p>Cada registro se vincula con uno de los ejes teóricos. Hacé clic para ampliar la imagen y leer su epígrafe.</p>
+    </header>
+
+    <div class="gallery" id="gallery">
+      <button class="gallery-item" data-concept="Eje 1 · Lugar y no lugar" data-caption="Acceso principal. El primer contacto con la institución define si el espacio se vive como tránsito o como lugar de permanencia (Augé)."><span class="gallery-tag">Eje 1</span><div class="ph ph-1"><span>Acceso principal</span></div><span class="zoom-hint" aria-hidden="true">+</span></button>
+      <button class="gallery-item" data-concept="Eje 2 · Señalética" data-caption="Señalética de orientación. Comunica la identidad institucional y el modo de circular por el espacio."><span class="gallery-tag">Eje 2</span><div class="ph ph-2"><span>Señalética</span></div><span class="zoom-hint" aria-hidden="true">+</span></button>
+      <button class="gallery-item" data-concept="Eje 2 · Biblioteca patrimonial" data-caption="Sección de fondo patrimonial. Fuentes primarias y materiales que requieren condiciones específicas de consulta."><span class="gallery-tag">Eje 2</span><div class="ph ph-3"><span>Fondo patrimonial</span></div><span class="zoom-hint" aria-hidden="true">+</span></button>
+      <button class="gallery-item" data-concept="Eje 1 · Lugar antropológico" data-caption="Sala de lectura. Espacio donde se concentra el tiempo de permanencia y donde pueden formarse relaciones reiteradas."><span class="gallery-tag">Eje 1</span><div class="ph ph-4"><span>Sala de lectura</span></div><span class="zoom-hint" aria-hidden="true">+</span></button>
+      <button class="gallery-item" data-concept="Eje 3 · Mostrador de referencia" data-caption="Mostrador de atención. Lugar de la entrevista de referencia, donde se clarifica la necesidad de información antes de buscarla."><span class="gallery-tag">Eje 3</span><div class="ph ph-5"><span>Mostrador</span></div><span class="zoom-hint" aria-hidden="true">+</span></button>
+      <button class="gallery-item" data-concept="Eje 2 · Comunicación" data-caption="Exhibición de publicaciones. Mensaje curado por el personal, que puede leerse como canal de comunicación con el público."><span class="gallery-tag">Eje 2</span><div class="ph ph-6"><span>Exhibición</span></div><span class="zoom-hint" aria-hidden="true">+</span></button>
+      <button class="gallery-item" data-concept="Eje 1 · Subjetividad" data-caption="Rincón de encuentro. Espacio de actividades compartidas en el que la comunidad se reconoce y se sostiene."><span class="gallery-tag">Eje 1</span><div class="ph ph-7"><span>Encuentro</span></div><span class="zoom-hint" aria-hidden="true">+</span></button>
+      <button class="gallery-item" data-concept="Eje 2 · Feedback" data-caption="Buzón o registro de consultas. Canal de retorno que permite al emisor conocer las necesidades del receptor."><span class="gallery-tag">Eje 2</span><div class="ph ph-8"><span>Registro de consultas</span></div><span class="zoom-hint" aria-hidden="true">+</span></button>
+      <button class="gallery-item" data-concept="Eje 1 · No lugar" data-caption="Pasillo de circulación en horario de baja afluencia. Un registro del espacio como tránsito, en la lectura de Augé."><span class="gallery-tag">Eje 1</span><div class="ph ph-9"><span>Circulación</span></div><span class="zoom-hint" aria-hidden="true">+</span></button>
+    </div>
+    <p class="small" style="margin-top:1.2rem;color:var(--texto-suave)">Imágenes de marcador: reemplazar por registros propios con autorización institucional, y ajustar cada epígrafe a lo que efectivamente muestra.</p>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imágenes" aria-hidden="true">
+  <button class="lb-close" aria-label="Cerrar">&times;</button>
+  <button class="lb-nav lb-prev" aria-label="Imagen anterior">&#8249;</button>
+  <figure class="lb-figure">
+    <div class="lb-stage" id="lb-stage"></div>
+    <p class="lb-concept" id="lb-concept"></p>
+    <figcaption id="lb-caption"></figcaption>
+  </figure>
+  <button class="lb-nav lb-next" aria-label="Imagen siguiente">&#8250;</button>
+  <p class="lb-counter" id="lb-counter"></p>
+</div>
+
+<!-- ===================== ENTREVISTA ===================== -->
+<section id="entrevista" class="section">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">03 · Entrevista de referencia</p>
+      <h2>Conversación con el personal</h2>
+      <p>Escuchá los fragmentos sin salir de la página. Cada uno se lee a la luz de un eje teórico.</p>
+    </header>
+
+    <div class="audio-player" id="player-box">
+      <p class="audio-label">Reproduciendo</p>
+      <p class="audio-title" id="audio-title">Seleccioná un fragmento</p>
+      <div class="audio-controls">
+        <button class="play-main" id="play-btn" aria-label="Reproducir" disabled>▶</button>
+        <input type="range" class="audio-seek" id="seek" min="0" max="100" value="0" step="0.1" aria-label="Posición del audio" disabled>
+        <span class="audio-time" id="audio-time">00:00 / 00:00</span>
+      </div>
+      <p class="audio-status" id="audio-status">Los archivos de audio se cargarán desde la carpeta audio/.</p>
+    </div>
+
+    <audio id="player" preload="none"></audio>
+
+    <ol class="audio-list">
+      <li class="audio-item" data-src="audio/fragmento1.mp3" data-title="I. Origen y misión de la biblioteca">
+        <button class="pick" aria-label="Reproducir: Origen y misión de la biblioteca">▶</button>
+        <div>
+          <p class="meta">Fragmento I · Eje 1</p>
+          <h3>Origen y misión de la biblioteca</h3>
+          <p class="transcript">“[Cita literal aprobada por el entrevistado.]”</p>
+          <p class="analysis-mini"><span class="tag">Lugar antropológico</span>Relato de origen que inscribe la biblioteca en una historia institucional y comunitaria.</p>
+        </div>
+      </li>
+      <li class="audio-item" data-src="audio/fragmento2.mp3" data-title="II. Mediación y referencia">
+        <button class="pick" aria-label="Reproducir: Mediación y referencia">▶</button>
+        <div>
+          <p class="meta">Fragmento II · Eje 3</p>
+          <h3>Mediación y entrevista de referencia</h3>
+          <p class="transcript">“[Cita literal aprobada por el entrevistado.]”</p>
+          <p class="analysis-mini"><span class="tag">Referencia</span>Cómo se clarifica la necesidad de información antes de responder y qué tipo de consultas llegan.</p>
+        </div>
+      </li>
+      <li class="audio-item" data-src="audio/fragmento3.mp3" data-title="III. Tipología de usuarios y comunicación">
+        <button class="pick" aria-label="Reproducir: Tipología de usuarios y comunicación">▶</button>
+        <div>
+          <p class="meta">Fragmento III · Eje 2</p>
+          <h3>Usuarios, canales y retorno</h3>
+          <p class="transcript">“[Cita literal aprobada por el entrevistado.]”</p>
+          <p class="analysis-mini"><span class="tag">Comunicación</span>Qué canales usa la biblioteca y cómo llega la retroalimentación del público.</p>
+        </div>
+      </li>
+      <li class="audio-item" data-src="audio/fragmento4.mp3" data-title="IV. Patrimonio y proyección">
+        <button class="pick" aria-label="Reproducir: Patrimonio y proyección">▶</button>
+        <div>
+          <p class="meta">Fragmento IV · Eje 2</p>
+          <h3>Patrimonio y proyección</h3>
+          <p class="transcript">“[Cita literal aprobada por el entrevistado.]”</p>
+          <p class="analysis-mini"><span class="tag">Patrimonial</span>Criterios sobre fuentes primarias, literatura gris y el futuro del espacio.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== DIAGNÓSTICO ===================== -->
+<section id="diagnostico" class="section section-alt">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">04 · Diagnóstico</p>
+      <h2>Lectura crítica de la visita</h2>
+      <p>Cada dimensión se contrasta con el marco teórico. Las hipótesis deben confirmarse con el registro de campo antes de considerarse conclusiones.</p>
+    </header>
+
+    <table class="diag">
+      <thead>
+        <tr><th>Dimensión</th><th>Marco de referencia</th><th>Hipótesis a validar</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Espacio</td><td>Lugar antropológico vs. no lugar (Augé)</td><td>Las zonas de lectura funcionan como lugar; el acceso y el pasillo funcionan como tránsito.</td></tr>
+        <tr><td>Señalética</td><td>Señalética como factor de identidad</td><td>La señalética orienta, pero comunica poco sobre el carácter de la institución.</td></tr>
+        <tr><td>Comunicación</td><td>Cadena emisor–mensaje–canal–receptor–feedback</td><td>El canal de retorno (consultas y comentarios) es débil o poco visible.</td></tr>
+        <tr><td>Rol del personal</td><td>Del guardalibros al curador de contenidos</td><td>La mediación personal sostiene la experiencia más que los recursos materiales.</td></tr>
+        <tr><td>Referencia</td><td>Entrevista de referencia; tipología de consultas</td><td>Las consultas administrativas predominan; las de investigación requieren más tiempo y espacio.</td></tr>
+        <tr><td>Patrimonio</td><td>Exhaustividad, fuentes primarias, literatura gris</td><td>El fondo patrimonial es poco accesible para el público no especializado.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== PROPUESTAS ===================== -->
+<section id="propuestas" class="section">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">05 · Propuestas de mejora</p>
+      <h2>Acciones posibles</h2>
+      <p>Propuestas derivadas del marco teórico. Su pertinencia depende de los hallazgos confirmados en campo.</p>
+    </header>
+
+    <div class="proposal">
+      <div class="prop">
+        <h4>Espacio como lugar</h4>
+        <p>Crear zonas de permanencia con mobiliario que favorezca la conversación y la lectura compartida, para transformar el paso en encuentro.</p>
+      </div>
+      <div class="prop">
+        <h4>Señalética identitaria</h4>
+        <p>Revisar la señalética para que exprese la identidad institucional y oriente a quien llega por primera vez, sin perder claridad funcional.</p>
+      </div>
+      <div class="prop">
+        <h4>Canal de retorno</h4>
+        <p>Incorporar un registro simple de consultas y sugerencias, de modo que el feedback del receptor llegue de manera sistemática al emisor.</p>
+      </div>
+      <div class="prop">
+        <h4>Referencia estructurada</h4>
+        <p>Adoptar una ficha breve de entrevista de referencia que permita clasificar la consulta y definir la necesidad real antes de buscar.</p>
+      </div>
+      <div class="prop">
+        <h4>Accesibilidad patrimonial</h4>
+        <p>Preparar guías o muestras comentadas del fondo patrimonial y de la literatura gris, con condiciones claras de consulta.</p>
+      </div>
+      <div class="prop">
+        <h4>Profesional curador</h4>
+        <p>Fortalecer el rol del personal como curador de contenidos, con selecciones temáticas periódicas difundidas por los canales que usa la comunidad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONCLUSIONES ===================== -->
+<section id="conclusiones" class="section section-alt">
+  <div class="container texto">
+    <header class="section-head">
+      <p class="kicker">06 · Conclusiones</p>
+      <h2>Lo que la biblioteca sostiene</h2>
+    </header>
+    <p>La visita muestra una biblioteca que se sitúa entre dos regímenes: el tránsito propio de la sobremodernidad y la permanencia que la convierte en lugar. Desde el marco de Augé, la diferencia no está en el edificio sino en los vínculos y la memoria que se producen en él.</p>
+    <p>Desde el eje de tipología y comunicación, el personal aparece como emisor clave de un mensaje que combina fondo, espacio y señalética. Para cerrar el circuito, el canal de retorno resulta una oportunidad de mejora.</p>
+    <p>Desde el servicio de referencia, la entrevista permite distinguir la pregunta formulada de la necesidad real. Esa distinción es la que transforma una consulta administrativa en una investigación bibliográfica bien orientada.</p>
+    <p>En suma, la biblioteca sostiene la constitución subjetiva de su comunidad cuando logra que el visitante encuentre un lugar, una memoria compartida y alguien que lo escuche. Esa función adquiere más valor en un contexto de incertidumbre.</p>
+    <div class="note"><strong>Pendiente:</strong> validar las conclusiones con el registro de campo, las transcripciones aprobadas y la lectura completa de las fuentes.</div>
+  </div>
+</section>
+
+<!-- ===================== BIBLIOGRAFÍA ===================== -->
+<section id="bibliografia" class="section">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">07 · Bibliografía</p>
+      <h2>Referencias</h2>
+      <p>Formato APA 7.ª edición. Las entradas marcadas deben completarse con los datos de la edición consultada.</p>
+    </header>
+
+    <div class="bib-group">
+      <h3>Fuentes teóricas</h3>
+      <ul class="biblio">
+        <li>Augé, M. (1993). <em>Los no lugares: Espacios del anonimato. Una antropología de la sobremodernidad</em>. Gedisa. (Obra original publicada en 1992.)</li>
+        <li><span class="todo">Blasco, G. [año]. <em>[Título del texto de cátedra]</em>. [Completar datos bibliográficos].</span></li>
+        <li><span class="todo">Allendez Sullivan, [inicial]., y de la Puente, [inicial]. [año]. <em>[Título del texto de cátedra]</em>. [Completar datos bibliográficos]. (Verificar grafía del apellido.)</span></li>
+        <li><span class="todo">García, [inicial]., y Portugal, [inicial]. [año]. <em>[Título de la obra]</em>. [Completar].</span></li>
+        <li><span class="todo">Merlo Vega, [inicial]. [año]. <em>[Título de la obra]</em>. [Completar].</span></li>
+      </ul>
+    </div>
+
+    <div class="bib-group">
+      <h3>Fuentes de la investigación</h3>
+      <ul class="biblio">
+        <li><span class="todo">Entrevista de referencia al personal de la Biblioteca del Centro Cultural de la Embajada de la República del Paraguay. ([fecha]). [Grabación en archivo del autor].</span></li>
+        <li><span class="todo">Registro de relevamiento espacial. ([fechas]). [Notas y fotografías de campo, archivo del autor].</span></li>
+      </ul>
+    </div>
+
+    <div class="note"><strong>Antes de entregar:</strong> verificar cada entrada contra el documento original, completar las páginas de las citas textuales y revisar la grafía de los autores de la cátedra.</div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>La biblioteca como lugar · Webdoc académico</p>
+    <p class="small">Roxana Noemí Saucedo Rojas · Biblioteconomía 1 · Docente: Silvina Fava · IFTS N.º 13 · 2026</p>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* Barra de progreso de lectura */
+  const progress = document.getElementById('progress');
+  const updateProgress = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = max > 0 ? `${(window.scrollY / max) * 100}%` : '0%';
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  /* Menú móvil */
+  const toggle = document.querySelector('.menu-toggle');
+  const menu = document.getElementById('menu');
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  /* Enlace activo */
+  const navLinks = document.querySelectorAll('.site-nav a');
+  const navObs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) navLinks.forEach(a =>
+        a.classList.toggle('active', a.getAttribute('href') === `#${en.target.id}`));
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  document.querySelectorAll('main section[id]').forEach(s => navObs.observe(s));
+
+  /* Lightbox */
+  const items = Array.from(document.querySelectorAll('.gallery-item'));
+  const lightbox = document.getElementById('lightbox');
+  const stage = document.getElementById('lb-stage');
+  const concept = document.getElementById('lb-concept');
+  const caption = document.getElementById('lb-caption');
+  const counter = document.getElementById('lb-counter');
+  let current = 0;
+  let lastFocused = null;
+
+  function render(index) {
+    current = index;
+    stage.innerHTML = items[index].querySelector('.ph').outerHTML;
+    concept.textContent = items[index].dataset.concept || '';
+    caption.textContent = items[index].dataset.caption || '';
+    counter.textContent = `${index + 1} / ${items.length}`;
+  }
+  function openLb(index) {
+    lastFocused = document.activeElement;
+    render(index);
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    lightbox.querySelector('.lb-close').focus();
+  }
+  function closeLb() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+  const step = d => render((current + d + items.length) % items.length);
+
+  items.forEach((el, i) => el.addEventListener('click', () => openLb(i)));
+  lightbox.querySelector('.lb-close').addEventListener('click', closeLb);
+  lightbox.querySelector('.lb-prev').addEventListener('click', () => step(-1));
+  lightbox.querySelector('.lb-next').addEventListener('click', () => step(1));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLb(); });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
+  let touchX = 0;
+  lightbox.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+  lightbox.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  /* Reproductor HTML5 */
+  const audio = document.getElementById('player');
+  const playBtn = document.getElementById('play-btn');
+  const seek = document.getElementById('seek');
+  const timeEl = document.getElementById('audio-time');
+  const titleEl = document.getElementById('audio-title');
+  const statusEl = document.getElementById('audio-status');
+  const items2 = Array.from(document.querySelectorAll('.audio-item'));
+  let currentItem = null;
+  let hasSource = false;
+
+  const fmt = s => {
+    if (!isFinite(s) || s < 0) s = 0;
+    return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  };
+  const setPlayIcon = playing => {
+    playBtn.textContent = playing ? '❚❚' : '▶';
+    playBtn.setAttribute('aria-label', playing ? 'Pausar' : 'Reproducir');
+    if (currentItem) currentItem.querySelector('.pick').textContent = playing ? '❚❚' : '▶';
+  };
+  const updateTime = () => {
+    const d = audio.duration;
+    seek.value = d ? (audio.currentTime / d) * 100 : 0;
+    timeEl.textContent = `${fmt(audio.currentTime)} / ${fmt(d)}`;
+  };
+
+  function selectItem(item) {
+    if (currentItem && currentItem !== item) {
+      currentItem.classList.remove('is-active');
+      currentItem.querySelector('.pick').textContent = '▶';
+    }
+    currentItem = item;
+    item.classList.add('is-active');
+    titleEl.textContent = item.dataset.title;
+    audio.src = item.dataset.src;
+    audio.load();
+    hasSource = true;
+    playBtn.disabled = false;
+    seek.disabled = false;
+    statusEl.textContent = '';
+  }
+
+  items2.forEach(item => {
+    item.querySelector('.pick').addEventListener('click', () => {
+      if (currentItem === item) { togglePlay(); return; }
+      selectItem(item);
+      togglePlay(true);
+    });
+  });
+
+  function togglePlay(forcePlay) {
+    if (!hasSource) return;
+    if (forcePlay === true || audio.paused) {
+      audio.play().catch(() => {
+        statusEl.textContent = 'No se pudo reproducir. Verificá que el archivo exista en la carpeta audio/.';
+        setPlayIcon(false);
+      });
+    } else {
+      audio.pause();
+    }
+  }
+
+  playBtn.addEventListener('click', () => togglePlay());
+  audio.addEventListener('play', () => setPlayIcon(true));
+  audio.addEventListener('pause', () => setPlayIcon(false));
+  audio.addEventListener('ended', () => setPlayIcon(false));
+  audio.addEventListener('timeupdate', updateTime);
+  audio.addEventListener('loadedmetadata', updateTime);
+  audio.addEventListener('error', () => {
+    statusEl.textContent = 'Audio no disponible. Cargá el archivo en la carpeta audio/ con el nombre indicado.';
+    setPlayIcon(false);
+  });
+  seek.addEventListener('input', () => {
+    if (audio.duration) audio.currentTime = (seek.value / 100) * audio.duration;
+  });
+});
+</script>
+</body>
+</html>
